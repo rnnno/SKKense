@@ -31,7 +31,7 @@ final class MockTextInput: NSObject, IMKTextInput {
     init(text: String = "",
          supportsMarkedTextReplacementRange: Bool = true,
          supportsSelectedRange: Bool = true,
-         bundleIdentifier: String = "net.mtgto.inputmethod.macSKKTests") {
+         bundleIdentifier: String = "io.github.rnnno.skkenseTests") {
         self.text = text
         self.caret = (text as NSString).length
         self.supportsMarkedTextReplacementRange = supportsMarkedTextReplacementRange

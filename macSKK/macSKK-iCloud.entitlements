@@ -7,6 +7,6 @@
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
 	<key>com.apple.security.temporary-exception.mach-register.global-name</key>
-	<string>net.mtgto.inputmethod.macSKK_Connection</string>
+	<string>io.github.rnnno.skkense_Connection</string>
 </dict>
 </plist>

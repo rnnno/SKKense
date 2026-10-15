@@ -14,7 +14,7 @@ class FetchUpdateService: NSObject, FetchUpdateServiceProtocol {
      * https://docs.github.com/ja/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release
      */
     @objc func fetch() async throws -> Data {
-        var request = URLRequest(url: URL(string: "https://api.github.com/repos/mtgto/macSKK/releases/latest")!)
+        var request = URLRequest(url: URL(string: "https://api.github.com/repos/rnnno/SKKense/releases/latest")!)
         request.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
         request.setValue("2022-11-28", forHTTPHeaderField: "X-GitHub-Api-Version")
         do {

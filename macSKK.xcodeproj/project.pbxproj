@@ -320,7 +320,7 @@
 		CE53D8C92D7D8BED0013806A /* release.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = release.json; sourceTree = "<group>"; };
 		CE5EB6AC2AAC0DE000389B98 /* FileDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDict.swift; sourceTree = "<group>"; };
 		CE5EB6AE2AAC0DEB00389B98 /* MemoryDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDict.swift; sourceTree = "<group>"; };
-		CE5ECF322957034B00E7BE7D /* macSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE5ECF322957034B00E7BE7D /* SKKense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKKense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5ECF352957034B00E7BE7D /* macSKKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macSKKApp.swift; sourceTree = "<group>"; };
 		CE5ECF392957034D00E7BE7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE5ECF3C2957034D00E7BE7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -542,7 +542,7 @@
 		CE5ECF332957034B00E7BE7D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CE5ECF322957034B00E7BE7D /* macSKK.app */,
+				CE5ECF322957034B00E7BE7D /* SKKense.app */,
 				CE5ECF432957034D00E7BE7D /* macSKKTests.xctest */,
 				CED7CA292A8394F7004EF988 /* FetchUpdateService.xpc */,
 				CEF3D8712B9EF0C000BD1D3A /* SKKServClient.xpc */,
@@ -833,7 +833,7 @@
 			packageProductDependencies = (
 			);
 			productName = macSKK;
-			productReference = CE5ECF322957034B00E7BE7D /* macSKK.app */;
+			productReference = CE5ECF322957034B00E7BE7D /* SKKense.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CE5ECF422957034D00E7BE7D /* macSKKTests */ = {
@@ -1436,8 +1436,9 @@
 					"@executable_path/../Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-enable-upcoming-feature ExistentialAny";
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKK;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense;
+				PRODUCT_NAME = SKKense;
+				PRODUCT_MODULE_NAME = macSKK;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "macSKK/macSKK-Bridging-Header.h";
@@ -1467,8 +1468,9 @@
 					"@executable_path/../Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-enable-upcoming-feature ExistentialAny";
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKK;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense;
+				PRODUCT_NAME = SKKense;
+				PRODUCT_MODULE_NAME = macSKK;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "macSKK/macSKK-Bridging-Header.h";
@@ -1483,11 +1485,11 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKKTests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkenseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/macSKK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/macSKK";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SKKense.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SKKense";
 			};
 			name = Debug;
 		};
@@ -1499,11 +1501,11 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKKTests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkenseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/macSKK.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/macSKK";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SKKense.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SKKense";
 			};
 			name = Release;
 		};
@@ -1518,7 +1520,7 @@
 				INFOPLIST_FILE = FetchUpdateService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FetchUpdateService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKK.FetchUpdateService;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.FetchUpdateService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1537,7 +1539,7 @@
 				INFOPLIST_FILE = FetchUpdateService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FetchUpdateService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKK.FetchUpdateService;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.FetchUpdateService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1557,7 +1559,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SKKServClient;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKK.SKKServClient;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.SKKServClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1576,7 +1578,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SKKServClient;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.mtgto.inputmethod.macSKK.SKKServClient;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.SKKServClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
