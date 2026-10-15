@@ -1,97 +1,36 @@
-macSKK [![test](https://github.com/mtgto/macSKK/actions/workflows/test.yml/badge.svg)](https://github.com/mtgto/macSKK/actions/workflows/test.yml)
-====
-macSKKはmacOS用の[SKK](https://ja.wikipedia.org/wiki/SKK)方式の日本語入力システム (インプットメソッド) です。
+# SKKense
 
-macOS用のSKK方式の日本語入力システムにはすでに[AquaSKK](https://github.com/codefirst/aquaskk/)がありますが、いくつか独自の機能を作りたいと思い新たに開発しています。
+読み: スケンス。第六勘つき SKK。
 
-macSKKを使用するには macOS 13.3 (Ventura) 以降が必要です。
-Universal Binary (Apple Silicon & Intel Mac) でビルドしていますが、動作確認はApple Silicon環境でのみ行っています。
+[macSKK](https://github.com/mtgto/macSKK)（mtgto 氏による macOS 向け SKK 入力メソッド）の fork です。SKK の明示的な変換操作はそのままに、次の 2 つを足すことを目的にしています。
 
-## 特徴
+- **文脈から変換候補を推論する**: カーソル前のテキストと辞書候補をローカルの小さな言語モデル（zenz-v3.1-xsmall、ONNX Runtime、CPU）に渡し、第 1 候補を選び直す。モデルは辞書にある候補の中から選ぶだけで、辞書にない語は生成しない。
+- **送り仮名の位置が本来と違っても候補を出す**: `Kaku` と打つだけで `か|く` の区切りを辞書で探して「書く」を候補に出す。`MatiGa` のように送り仮名の開始位置が辞書の登録形とずれていても、読み全体から区切りを探し直す。
 
-- 日本語入力システムはパスワードなどの機密情報を処理する可能性があるため安全性が求められるプログラムです。そのためmacSKKはmacOSのSandbox機構を使いネットワーク通信やファイルの読み書きに制限をかけることでセキュリティホールを攻撃されたときの被害を減らすように心掛けます。
-- 不正なコードが含まれるリスクを避けるため、サードパーティによる外部ライブラリは使用していません。
-- すべてをSwiftだけでコーディングしており、イベント処理にCombineを、UI部分にはSwiftUIを使用しています。
-- 単語登録モードや送り仮名入力中などキー入力による状態変化管理が複雑なのでユニットテストを書いてエンバグのリスクを減らす努力をしています。
+どちらも設定で個別に無効化でき、無効にすると macSKK と同じ動作になります。
 
-## 実装予定
+## 状態
 
-しばらくはAquaSKKにはあるけどmacSKKにない機能を実装しつつ、徐々に独自機能を実装していこうと考えています。
+開発中。本家 macSKK と同じ Mac に並行インストールできるよう、Bundle Identifier（`io.github.rnnno.skkense`）とアプリ名（`SKKense.app`）、入力ソース名（「ひらがな (SKKense)」など）を本家と変えてあります。辞書や設定は本家とは別のコンテナ（`~/Library/Containers/io.github.rnnno.skkense/`）に置かれます。配布物（署名・公証済みのインストーラ）はありません。
 
-- [x] 複数辞書を使用できるようにする
-- [x] [マイ辞書に保存しないプライベートモード](https://mtgto.github.io/macSKK/features/private-mode)
-- [x] [アプリごとに直接入力させるかどうかを設定できるようにする](https://mtgto.github.io/macSKK/config/direct-mode)
-  - ddskkを使っているときのGUI版Emacs.appなど
-- [x] [過去の入力を使った入力補完](https://mtgto.github.io/macSKK/features/word-registration#読みの補完)
-- [x] [数値変換](https://mtgto.github.io/macSKK/features/numeric)
-- [x] 送りありエントリのブロック形式
-- [x] [キー配列の設定 (Dvorakなど)](https://mtgto.github.io/macSKK/config/general#キーボードレイアウト)
-- [x] [ローマ字変換ルールの設定](https://mtgto.github.io/macSKK/config/kana-rule)
-- [x] [SKKServを辞書として使う](https://mtgto.github.io/macSKK/config/dictionary#skkserv)
-- [x] [キーバインドの変更](https://mtgto.github.io/macSKK/config/keybinding)
-- [ ] Java AWT製アプリケーションで入力ができない問題のワークアラウンド対応 (JetBrain製品など)
+本家への追従は `upstream`（mtgto/macSKK）のリリースごとに merge します。本家の使い方・設定は [macSKK のドキュメント](https://mtgto.github.io/macSKK/) を参照してください。
 
-### 実装予定の独自機能
+## ビルド
 
-- [x] [自動更新確認](https://mtgto.github.io/macSKK/config/software-update)
-  - Network Outgoingが可能なXPCプロセスを作成し、GitHub Releasesから情報を定期的に取得して新しいバージョンが見つかったらNotification Centerに表示する
-- [x] 辞書のJSON形式への対応
-- [x] xterm.jsを利用するアプリケーションでaiueoでひらがなが入力できない問題のワークアラウンド対応 (VSCode Terminal, Hyperなど)
-- [ ] iCloudにマイ辞書を保存して他環境と共有できるようにする
-- [ ] マイ辞書の暗号化
-  - 編集したい場合は生データでのエクスポート & インポートできるようにする
+Xcode が必要です。
 
-## インストール
-
-2026年現在、Mac App Storeでは日本語入力システムを配布することができないため、[Appleのソフトウェア公証](https://support.apple.com/ja-jp/guide/security/sec3ad8e6e53/1/web/1)を受けたアプリケーションバイナリを[GitHub Releases](https://github.com/mtgto/macSKK/releases/latest)で配布しています。dmgファイルをダウンロードしマウントした中にあるpkgファイルからインストールしてください。
-
-Homebrew Caskでインストールする場合:
-
-```console
-brew install --cask macskk
+```sh
+./build_restart.sh   # Debug ビルドして ~/Library/Input Methods/SKKense.app に配置し、プロセスを再起動
 ```
 
-詳しいインストール手順・辞書の導入方法は **[ドキュメントサイト](https://mtgto.github.io/macSKK/guide/install)** を参照してください。
+初回はシステム設定 → キーボード → 入力ソースで「ひらがな (SKKense)」を追加してください。辞書（`SKK-JISYO.L` など）は `~/Library/Containers/io.github.rnnno.skkense/Data/Documents/Dictionaries/` に置きます。
 
-## ドキュメント
+## 設計
 
-設定・機能・FAQ などの詳細は **https://mtgto.github.io/macSKK/** を参照してください。
+- 送り仮名の自動解決は辞書の見出し語の規約（語幹 + 送り仮名 1 文字目の子音記号）だけで行い、活用表は持たない。雑音は活用語尾の許可リストと並び順で抑える。
+- 文脈推薦は二段階採点（文脈と読みの KV キャッシュを先に作り、Space 押下時に候補だけを採点）で、Space 1 回あたり 20 ms 以内を上限にする。間に合わなければ従来の順序で表示する。
 
-## 開発
+## ライセンスとクレジット
 
-コントリビュートのガイドを [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) に用意しています。
-
-Xcodeでビルドし、 `/Library/Input Methods` に `macSKK.app` を配置してからシステム設定→キーボード→入力ソースで `ひらがな` などを追加してください。
-
-macOS 14以降ではApp Sandboxの制限が強くなりました。すでにリリース版macSKKを使っている環境で開発版のmacSKKを使用すると起動時に `「"macSKK"がほかのアプリからのデータへのアクセスを求めています。」` というダイアログが表示されることがあります。これはリリース版で署名に使用しているTeam IDと異なるProvisioning Profileを使用している (もしくはAd hoc署名を使っている) 場合に同じユーザー辞書ファイルにアクセスすることで発生します。この状態で「許可」を選んでしまうとリリース版のmacSKKが逆に読み込めなくなるなどの想定しない問題が発生する可能性があります。お手数ですがBundle Identifierを変更するなどを検討してください。
-
-### バージョンアップ
-
-`X.Y.Z` 形式のバージョン (MARKETING_VERSION) とビルド番号 (CURRENT_PROJECT_VERSION) の更新が必要です。
-Xcodeで編集するときは、プロジェクトナビゲータでプロジェクトを選択してBuild Settingsから変更してください。
-
-#### ビルド番号
-
-メジャー、マイナー、パッチ、どのバージョンアップでも1ずつインクリメントしてください。
-Xcodeから手動でやってもいいし、`agvtool`でもいいです。
-
-```console
-agvtool next-version
-```
-
-#### MARKETING_VERSIONの更新
-
-`Info.plist`に`CFBundleShortVersionString`で管理するのではなくpbxprojに`MARKETING_VERSION`で管理する形式だと`agvtool next-marketing-version` が使えないみたいなのでXcodeで手動で変えてください。
-
-### リリース
-
-- CHANGELOGを記述
-- バージョンアップ
-- `make clean && make release`
-- GitHubのReleaseを作成、dmgとdSYMsをアップロード、CHANGELOGをコピペ
-
-## ライセンス
-
-macSKKはGNU一般公衆ライセンスv3またはそれ以降のバージョンの条項の元で配布されるフリー・ソフトウェアです。
-
-詳細は `LICENSE` を参照してください。
+- 本体: GPL-3.0（macSKK を継承）。macSKK の著作権は mtgto 氏にあります。
+- 文脈推薦モデル zenz-v3.1-xsmall（Keita Miwa 氏、CC-BY-SA 4.0）。同梱する場合はモデルのライセンスに従います。
