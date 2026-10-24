@@ -11,7 +11,7 @@
 
 ## 状態
 
-開発中。本家 macSKK と同じ Mac に並行インストールできるよう、Bundle Identifier（`io.github.rnnno.skkense`）とアプリ名（`SKKense.app`）、入力ソース名（「ひらがな (SKKense)」など）を本家と変えてあります。辞書や設定は本家とは別のコンテナ（`~/Library/Containers/io.github.rnnno.skkense/`）に置かれます。配布物（署名・公証済みのインストーラ）はありません。
+開発中。本家 macSKK と同じ Mac に並行インストールできるよう、Bundle Identifier（`io.github.rnnno.inputmethod.skkense`）とアプリ名（`SKKense.app`）、入力ソース名（「ひらがな (SKKense)」など）を本家と変えてあります。辞書や設定は本家とは別のコンテナ（`~/Library/Containers/io.github.rnnno.inputmethod.skkense/`）に置かれます。配布物（署名・公証済みのインストーラ）はありません。
 
 本家への追従は `upstream`（mtgto/macSKK）のリリースごとに merge します。本家の使い方・設定は [macSKK のドキュメント](https://mtgto.github.io/macSKK/) を参照してください。
 
@@ -23,7 +23,7 @@ Xcode が必要です。
 ./build_restart.sh   # Debug ビルドして ~/Library/Input Methods/SKKense.app に配置し、プロセスを再起動
 ```
 
-初回はシステム設定 → キーボード → 入力ソースで「ひらがな (SKKense)」を追加してください。辞書（`SKK-JISYO.L` など）は `~/Library/Containers/io.github.rnnno.skkense/Data/Documents/Dictionaries/` に置きます。
+初回はシステム設定 → キーボード → 入力ソースで「ひらがな (SKKense)」を追加してください。辞書（`SKK-JISYO.L` など）は `~/Library/Containers/io.github.rnnno.inputmethod.skkense/Data/Documents/Dictionaries/` に置きます。
 
 ## 設計
 

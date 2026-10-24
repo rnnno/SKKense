@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>InputMethodConnectionName</key>
-	<string>io.github.rnnno.skkense_Connection</string>
+	<string>io.github.rnnno.inputmethod.skkense_Connection</string>
 	<key>InputMethodServerControllerClass</key>
 	<string>InputController</string>
 	<key>TISIntendedLanguage</key>
@@ -14,10 +14,10 @@
 	<dict>
 		<key>tsInputModeListKey</key>
 		<dict>
-			<key>io.github.rnnno.skkense.ascii</key>
+			<key>io.github.rnnno.inputmethod.skkense.ascii</key>
 			<dict>
 				<key>TISInputSourceID</key>
-				<string>io.github.rnnno.skkense.ascii</string>
+				<string>io.github.rnnno.inputmethod.skkense.ascii</string>
 				<key>TISIntendedLanguage</key>
 				<string>en</string>
 				<key>tsInputModeDefaultStateKey</key>
@@ -35,10 +35,10 @@
 				<key>tsInputModeScriptKey</key>
 				<string>smRoman</string>
 			</dict>
-			<key>io.github.rnnno.skkense.hiragana</key>
+			<key>io.github.rnnno.inputmethod.skkense.hiragana</key>
 			<dict>
 				<key>TISInputSourceID</key>
-				<string>io.github.rnnno.skkense.hiragana</string>
+				<string>io.github.rnnno.inputmethod.skkense.hiragana</string>
 				<key>TISIntendedLanguage</key>
 				<string>ja</string>
 				<key>tsInputModeDefaultStateKey</key>
@@ -56,10 +56,10 @@
 				<key>tsInputModeScriptKey</key>
 				<string>smJapanese</string>
 			</dict>
-			<key>io.github.rnnno.skkense.katakana</key>
+			<key>io.github.rnnno.inputmethod.skkense.katakana</key>
 			<dict>
 				<key>TISInputSourceID</key>
-				<string>io.github.rnnno.skkense.katakana</string>
+				<string>io.github.rnnno.inputmethod.skkense.katakana</string>
 				<key>TISIntendedLanguage</key>
 				<string>ja</string>
 				<key>tsInputModeDefaultStateKey</key>
@@ -77,10 +77,10 @@
 				<key>tsInputModeScriptKey</key>
 				<string>smJapanese</string>
 			</dict>
-			<key>io.github.rnnno.skkense.hankaku</key>
+			<key>io.github.rnnno.inputmethod.skkense.hankaku</key>
 			<dict>
 				<key>TISInputSourceID</key>
-				<string>io.github.rnnno.skkense.hankaku</string>
+				<string>io.github.rnnno.inputmethod.skkense.hankaku</string>
 				<key>TISIntendedLanguage</key>
 				<string>ja</string>
 				<key>tsInputModeDefaultStateKey</key>
@@ -98,10 +98,10 @@
 				<key>tsInputModeScriptKey</key>
 				<string>smJapanese</string>
 			</dict>
-			<key>io.github.rnnno.skkense.eisu</key>
+			<key>io.github.rnnno.inputmethod.skkense.eisu</key>
 			<dict>
 				<key>TISInputSourceID</key>
-				<string>io.github.rnnno.skkense.eisu</string>
+				<string>io.github.rnnno.inputmethod.skkense.eisu</string>
 				<key>TISIntendedLanguage</key>
 				<string>ja</string>
 				<key>tsInputModeDefaultStateKey</key>
@@ -122,11 +122,11 @@
 		</dict>
 		<key>tsVisibleInputModeOrderedArrayKey</key>
 		<array>
-			<string>io.github.rnnno.skkense.ascii</string>
-			<string>io.github.rnnno.skkense.hiragana</string>
-			<string>io.github.rnnno.skkense.katakana</string>
-			<string>io.github.rnnno.skkense.hankaku</string>
-			<string>io.github.rnnno.skkense.eisu</string>
+			<string>io.github.rnnno.inputmethod.skkense.ascii</string>
+			<string>io.github.rnnno.inputmethod.skkense.hiragana</string>
+			<string>io.github.rnnno.inputmethod.skkense.katakana</string>
+			<string>io.github.rnnno.inputmethod.skkense.hankaku</string>
+			<string>io.github.rnnno.inputmethod.skkense.eisu</string>
 		</array>
 	</dict>
 	<key>tsInputMethodCharacterRepertoireKey</key>

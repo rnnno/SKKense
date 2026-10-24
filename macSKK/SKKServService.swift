@@ -62,7 +62,7 @@ struct SKKServService: SKKServServiceProtocol, @unchecked Sendable {
     private let service: NSXPCConnection
 
     init() {
-        service = NSXPCConnection(serviceName: "io.github.rnnno.skkense.SKKServClient")
+        service = NSXPCConnection(serviceName: "io.github.rnnno.inputmethod.skkense.SKKServClient")
         service.remoteObjectInterface = NSXPCInterface(with: (any SKKServClientProtocol).self)
         // TODO: invalidateされたりinterruptされたときに何かをするべき? (再接続とか?)
         service.invalidationHandler = {

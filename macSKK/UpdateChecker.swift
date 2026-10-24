@@ -7,7 +7,7 @@ import Foundation
 struct UpdateChecker {
     // atomをパースして返すので新しい順で返す
     func fetch() async throws -> Release {
-        let service = NSXPCConnection(serviceName: "io.github.rnnno.skkense.FetchUpdateService")
+        let service = NSXPCConnection(serviceName: "io.github.rnnno.inputmethod.skkense.FetchUpdateService")
         service.remoteObjectInterface = NSXPCInterface(with: (any FetchUpdateServiceProtocol).self)
         service.resume()
         

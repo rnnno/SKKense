@@ -1,6 +1,6 @@
 CFBundleName = "SKKense";
-io.github.rnnno.skkense.ascii = "ABC (SKKense)";
-io.github.rnnno.skkense.hiragana = "ひらがな (SKKense)";
-io.github.rnnno.skkense.katakana = "カタカナ (SKKense)";
-io.github.rnnno.skkense.hankaku = "半角カナ (SKKense)";
-io.github.rnnno.skkense.eisu = "全角英数 (SKKense)";
+io.github.rnnno.inputmethod.skkense.ascii = "ABC (SKKense)";
+io.github.rnnno.inputmethod.skkense.hiragana = "ひらがな (SKKense)";
+io.github.rnnno.inputmethod.skkense.katakana = "カタカナ (SKKense)";
+io.github.rnnno.inputmethod.skkense.hankaku = "半角カナ (SKKense)";
+io.github.rnnno.inputmethod.skkense.eisu = "全角英数 (SKKense)";

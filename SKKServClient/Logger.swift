@@ -4,7 +4,7 @@ import Foundation
 import os
 
 /// SKKServClientターゲット共通のロガー。
-let logger: Logger = Logger(subsystem: "io.github.rnnno.skkense", category: "skkserv")
+let logger: Logger = Logger(subsystem: "io.github.rnnno.inputmethod.skkense", category: "skkserv")
 
 /// startからの経過ミリ秒。ログ出力用。
 func elapsedMilliseconds(since start: DispatchTime) -> Double {

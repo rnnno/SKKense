@@ -1436,7 +1436,7 @@
 					"@executable_path/../Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-enable-upcoming-feature ExistentialAny";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkense;
 				PRODUCT_NAME = SKKense;
 				PRODUCT_MODULE_NAME = macSKK;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1468,7 +1468,7 @@
 					"@executable_path/../Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "-enable-upcoming-feature ExistentialAny";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkense;
 				PRODUCT_NAME = SKKense;
 				PRODUCT_MODULE_NAME = macSKK;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1485,7 +1485,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkenseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkenseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1501,7 +1501,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkenseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkenseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1520,7 +1520,7 @@
 				INFOPLIST_FILE = FetchUpdateService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FetchUpdateService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.FetchUpdateService;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkense.FetchUpdateService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1539,7 +1539,7 @@
 				INFOPLIST_FILE = FetchUpdateService/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FetchUpdateService;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.FetchUpdateService;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkense.FetchUpdateService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1559,7 +1559,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SKKServClient;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.SKKServClient;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkense.SKKServClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -1578,7 +1578,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SKKServClient;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.skkense.SKKServClient;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.rnnno.inputmethod.skkense.SKKServClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;

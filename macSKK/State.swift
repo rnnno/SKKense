@@ -808,11 +808,11 @@ struct IMEState {
 
 // 入力モード (値はTISInputSourceID)
 enum InputMode: String, CaseIterable {
-    case hiragana = "io.github.rnnno.skkense.hiragana"
-    case katakana = "io.github.rnnno.skkense.katakana"
-    case hankaku = "io.github.rnnno.skkense.hankaku"  // 半角カタカナ
-    case eisu = "io.github.rnnno.skkense.eisu"  // 全角英数
-    case direct = "io.github.rnnno.skkense.ascii"  // 直接入力
+    case hiragana = "io.github.rnnno.inputmethod.skkense.hiragana"
+    case katakana = "io.github.rnnno.inputmethod.skkense.katakana"
+    case hankaku = "io.github.rnnno.inputmethod.skkense.hankaku"  // 半角カタカナ
+    case eisu = "io.github.rnnno.inputmethod.skkense.eisu"  // 全角英数
+    case direct = "io.github.rnnno.inputmethod.skkense.ascii"  // 直接入力
 
     // InputModeSettingsViewで使用
     var localizedLabel: String {
