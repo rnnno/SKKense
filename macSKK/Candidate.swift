@@ -26,13 +26,17 @@ struct Candidate: Hashable {
          */
         let word: Word.Word
 
-        /// 学習・削除に使う送り仮名ブロック（送り仮名の 1 文字目）。SelectingState の okuri より優先する。
+        /// 学習・削除に使う送り仮名ブロック（送り仮名の 1 文字目）。
         let okuri: String?
 
-        init(midashi: String, word: Word.Word, okuri: String? = nil) {
+        /// 表示・学習・削除で SelectingState の送り仮名を使わない。
+        let usesOwnOkuri: Bool
+
+        init(midashi: String, word: Word.Word, okuri: String? = nil, usesOwnOkuri: Bool = false) {
             self.midashi = midashi
             self.word = word
             self.okuri = okuri
+            self.usesOwnOkuri = usesOwnOkuri
         }
     }
 

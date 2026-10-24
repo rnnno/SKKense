@@ -318,9 +318,10 @@ final class StateMachine {
                     if unregisterState.text == "yes" {
                         let selecting = unregisterState.prev.selecting
                         let word = selecting.candidates[selecting.candidateIndex]
+                        let okuri = word.original?.usesOwnOkuri == true ? word.original?.okuri : selecting.okuri
                         _ = Global.dictionary.delete(yomi: word.toMidashiString(yomi: selecting.yomi),
                                                      word: Word(word.candidateString,
-                                                                okuri: word.original?.okuri ?? selecting.okuri))
+                                                                okuri: okuri))
 
                         if let prevMode = unregisterState.prev.selecting.prev.composing.prevMode {
                             // Abbrevモードの終了時の戻り先が指定されていれば、そちらに戻る
@@ -1513,7 +1514,12 @@ final class StateMachine {
             yomiText = String(yomiText.dropFirst())
             candidateWords = candidates(for: yomiText, option: .suffix) + candidates(for: yomiText, option: nil)
         } else if let okuri = composing.okuri, !okuri.isEmpty {
-            candidateWords = candidates(for: yomiText, option: .okuri(okuri.map { $0.kana }.joined()))
+            let okuriKana = okuri.map { $0.kana }.joined()
+            let stemReading = trimmedComposing.subText().joined() + okuriKana
+            candidateWords = Global.conversion.candidates(midashi: yomiText,
+                                                           okuri: okuriKana,
+                                                           reading: stemReading,
+                                                           inputMode: state.inputMode)
         } else {
             candidateWords = Global.conversion.candidates(yomi: yomiText, inputMode: state.inputMode)
         }
@@ -2003,7 +2009,7 @@ final class StateMachine {
         annotation: Annotation? = nil,
         source: UserDictAddSource = .conversion
     ) {
-        let okuri = candidate.original?.okuri ?? okuri
+        let okuri = candidate.original?.usesOwnOkuri == true ? candidate.original?.okuri : okuri
         if candidate.saveToUserDict {
             Global.dictionary.add(yomi: candidate.toMidashiString(yomi: yomi),
                                   word: Word(candidate.candidateString, okuri: okuri, annotation: annotation),

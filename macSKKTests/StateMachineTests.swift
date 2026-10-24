@@ -849,6 +849,46 @@ final class StateMachineTests: XCTestCase {
         XCTAssertFalse(selecting.candidates.contains { $0.word == "書く" })
     }
 
+    @MainActor func testHandleComposingStemConversionExplicit() {
+        Global.stemConversion = true
+        Global.dictionary.dicts = []
+        Global.dictionary.dicts.append(MemoryDict(entries: [
+            "まちがe": [Word("間違")],
+            "まちがu": [Word("間違")],
+            "まちがw": [Word("間違")],
+        ], readonly: true))
+
+        let ctx = StateMachineTestContext()
+        ctx.step(printableKeyEventAction(character: "m", withShift: true), [.composing("m")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("ま")])
+        ctx.step(printableKeyEventAction(character: "t"), [.composing("まt")])
+        ctx.step(printableKeyEventAction(character: "i"), [.composing("まち")])
+        ctx.step(printableKeyEventAction(character: "g", withShift: true), [.composing("まち*g")])
+        ctx.step(printableKeyEventAction(character: "a"), [.selecting("間違")])
+        ctx.step(enterAction, [.fixedText("間違")])
+
+        XCTAssertTrue(Global.dictionary.userDict?.refer("まちがe", option: nil).contains(Word("間違")) == true)
+    }
+
+    @MainActor func testHandleComposingStemConversionAppended() {
+        Global.stemConversion = true
+        Global.dictionary.dicts = []
+        Global.dictionary.dicts.append(MemoryDict(entries: [
+            "かんg": [Word("勘")],
+            "かんがe": [Word("考")],
+        ], readonly: true))
+
+        let ctx = StateMachineTestContext()
+        ctx.step(printableKeyEventAction(character: "k", withShift: true), [.composing("k")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("か")])
+        ctx.step(printableKeyEventAction(character: "n"), [.composing("かn")])
+        ctx.step(printableKeyEventAction(character: "n"), [.composing("かん")])
+        ctx.step(printableKeyEventAction(character: "g", withShift: true), [.composing("かん*g")])
+        ctx.step(printableKeyEventAction(character: "a"), [.selecting("勘が")])
+        ctx.step(printableKeyEventAction(character: " "), [.selecting("考")])
+        ctx.step(enterAction, [.fixedText("考")])
+    }
+
     @MainActor func testHandleComposingPrefix() {
         Global.dictionary.setEntries(["あ>": [Word("亜")], "あ": [Word("阿")]])
 
