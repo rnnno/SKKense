@@ -77,6 +77,7 @@ final class SettingsSync {
                     UserDefaultsKeys.enterNewLine,
                     UserDefaultsKeys.registerKatakana,
                     UserDefaultsKeys.autoOkuri,
+                    UserDefaultsKeys.stemConversion,
                     UserDefaultsKeys.ignoreLeadingSpacesWhenRegistering,
                     UserDefaultsKeys.backToSelectingFromRegistering,
                     UserDefaultsKeys.yomiCompletionByTabInRegistering,

@@ -21,6 +21,7 @@ final class StateMachineTests: XCTestCase {
             Global.candidateListDirection.send(.vertical)
             Global.keyBinding = KeyBindingSet.defaultKeyBindingSet
             Global.autoOkuri = false
+            Global.stemConversion = false
             Global.ignoreLeadingSpacesWhenRegistering = true
             Global.backToSelectingFromRegistering = false
             Global.yomiCompletionByTabInRegistering = false

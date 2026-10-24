@@ -101,6 +101,7 @@
 "Customize Input Mode Colors…" = "Customize Input Mode Colors…";
 "Register fixed katakana word to dict" = "Register fixed katakana word to dict";
 "Auto okuri" = "Resolve okurigana automatically";
+"Stem conversion" = "Convert stem without okurigana";
 "Ignore leading spaces when registering a word" = "Ignore leading spaces when registering a word";
 "Back to selecting candidates from empty word registration" = "Back to selecting candidates from registration using the backward candidate or backspace key";
 "Complete yomi by Tab key in word registration" = "Complete yomi by Tab key in word registration";

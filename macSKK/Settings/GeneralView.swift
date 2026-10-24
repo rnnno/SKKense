@@ -56,6 +56,9 @@ struct GeneralView: View {
                 Toggle(isOn: $settingsViewModel.autoOkuri) {
                     Text("Auto okuri")
                 }
+                Toggle(isOn: $settingsViewModel.stemConversion) {
+                    Text("Stem conversion")
+                }
                 Toggle(isOn: $settingsViewModel.ignoreLeadingSpacesWhenRegistering, label: {
                     Text("Ignore leading spaces when registering a word")
                 })

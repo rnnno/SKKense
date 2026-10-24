@@ -69,6 +69,8 @@ import Combine
     static var registerKatakana = false
     /// 送り仮名の開始位置を指定せずに変換したとき、読みの区切りを辞書で探して送りあり候補も出す
     static var autoOkuri = false
+    /// 送り仮名を打つ前に語幹だけを変換する。語幹 + 送り仮名 1 文字目の見出し語を前方一致で集め、語幹だけを候補に出す
+    static var stemConversion = false
     /// 単語登録中に先頭のスペースを無視するか
     static var ignoreLeadingSpacesWhenRegistering = true
     /// 単語登録中に空文字列で前候補キーもしくはバックスペースキーで候補選択に戻るか
