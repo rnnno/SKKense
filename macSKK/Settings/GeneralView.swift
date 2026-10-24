@@ -53,6 +53,9 @@ struct GeneralView: View {
                 Toggle(isOn: $settingsViewModel.registerKatakana, label: {
                     Text("Register fixed katakana word to dict")
                 })
+                Toggle(isOn: $settingsViewModel.autoOkuri) {
+                    Text("Auto okuri")
+                }
                 Toggle(isOn: $settingsViewModel.ignoreLeadingSpacesWhenRegistering, label: {
                     Text("Ignore leading spaces when registering a word")
                 })

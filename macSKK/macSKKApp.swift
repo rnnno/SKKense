@@ -257,6 +257,7 @@ struct macSKKApp: App {
             UserDefaultsKeys.showCandidateForCompletion: true,
             UserDefaultsKeys.fixedCompletionByPeriod: true,
             UserDefaultsKeys.registerKatakana: false,
+            UserDefaultsKeys.autoOkuri: false,
             UserDefaultsKeys.ignoreLeadingSpacesWhenRegistering: true,
             UserDefaultsKeys.backToSelectingFromRegistering: false,
             UserDefaultsKeys.yomiCompletionByTabInRegistering: false,

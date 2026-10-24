@@ -20,6 +20,7 @@ final class StateMachineTests: XCTestCase {
             Global.selectingBackspace = SelectingBackspace.default
             Global.candidateListDirection.send(.vertical)
             Global.keyBinding = KeyBindingSet.defaultKeyBindingSet
+            Global.autoOkuri = false
             Global.ignoreLeadingSpacesWhenRegistering = true
             Global.backToSelectingFromRegistering = false
             Global.yomiCompletionByTabInRegistering = false

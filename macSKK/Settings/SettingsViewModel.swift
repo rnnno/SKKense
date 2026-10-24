@@ -198,6 +198,8 @@ final class SettingsViewModel: ObservableObject {
     @Published var dateConversions: [DateConversion]
     /// qキーでカタカナで確定した場合に辞書に登録するか
     @Published var registerKatakana: Bool
+    /// 送り仮名を自動で解決するか
+    @Published var autoOkuri: Bool
     /// 単語登録中に先頭のスペースを無視するか
     @Published var ignoreLeadingSpacesWhenRegistering: Bool
     /// 単語登録中に空文字列で前候補キーもしくはバックスペースキーで候補選択に戻るか
@@ -292,6 +294,7 @@ final class SettingsViewModel: ObservableObject {
         showCandidateForCompletion = UserDefaults.app.bool(forKey: UserDefaultsKeys.showCandidateForCompletion)
         fixedCompletionByPeriod = UserDefaults.app.bool(forKey: UserDefaultsKeys.fixedCompletionByPeriod)
         registerKatakana = UserDefaults.app.bool(forKey: UserDefaultsKeys.registerKatakana)
+        autoOkuri = UserDefaults.app.bool(forKey: UserDefaultsKeys.autoOkuri)
         ignoreLeadingSpacesWhenRegistering = UserDefaults.app.bool(forKey: UserDefaultsKeys.ignoreLeadingSpacesWhenRegistering)
         backToSelectingFromRegistering = UserDefaults.app.bool(forKey: UserDefaultsKeys.backToSelectingFromRegistering)
         yomiCompletionByTabInRegistering = UserDefaults.app.bool(forKey: UserDefaultsKeys.yomiCompletionByTabInRegistering)
@@ -335,6 +338,7 @@ final class SettingsViewModel: ObservableObject {
         Global.candidateListDirection.send(candidateListDirection)
         Global.findCompletionFromAllDicts = findCompletionFromAllDicts
         Global.registerKatakana = registerKatakana
+        Global.autoOkuri = autoOkuri
         Global.ignoreLeadingSpacesWhenRegistering = ignoreLeadingSpacesWhenRegistering
         Global.backToSelectingFromRegistering = backToSelectingFromRegistering
         Global.yomiCompletionByTabInRegistering = yomiCompletionByTabInRegistering
@@ -763,6 +767,12 @@ final class SettingsViewModel: ObservableObject {
             Global.registerKatakana = registerKatakana
         }.store(in: &cancellables)
 
+        $autoOkuri.dropFirst().sink { autoOkuri in
+            UserDefaults.app.set(autoOkuri, forKey: UserDefaultsKeys.autoOkuri)
+            logger.log("送り仮名を自動で解決する設定を\(autoOkuri ? "有効" : "無効", privacy: .public)に変更しました")
+            Global.autoOkuri = autoOkuri
+        }.store(in: &cancellables)
+
         $ignoreLeadingSpacesWhenRegistering.dropFirst().sink { ignoreLeadingSpacesWhenRegistering in
             UserDefaults.app.set(ignoreLeadingSpacesWhenRegistering, forKey: UserDefaultsKeys.ignoreLeadingSpacesWhenRegistering)
             logger.log("単語登録中に先頭のスペースを無視する設定を\(ignoreLeadingSpacesWhenRegistering ? "有効" : "無効", privacy: .public)に変更しました")
@@ -962,6 +972,8 @@ final class SettingsViewModel: ObservableObject {
             findCompletionFromAllDicts = UserDefaults.app.bool(forKey: key)
         case UserDefaultsKeys.registerKatakana:
             registerKatakana = UserDefaults.app.bool(forKey: key)
+        case UserDefaultsKeys.autoOkuri:
+            autoOkuri = UserDefaults.app.bool(forKey: key)
         case UserDefaultsKeys.ignoreLeadingSpacesWhenRegistering:
             ignoreLeadingSpacesWhenRegistering = UserDefaults.app.bool(forKey: key)
         case UserDefaultsKeys.backToSelectingFromRegistering:
@@ -1119,6 +1131,7 @@ final class SettingsViewModel: ObservableObject {
         showCandidateForCompletion = true
         fixedCompletionByPeriod = true
         registerKatakana = false
+        autoOkuri = false
         ignoreLeadingSpacesWhenRegistering = true
         backToSelectingFromRegistering = false
         yomiCompletionByTabInRegistering = false

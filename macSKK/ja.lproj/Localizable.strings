@@ -100,6 +100,7 @@
 "Show Marked Text Marker" = "▽と▼を表示する";
 "Customize Input Mode Colors…" = "入力モードの色をカスタマイズ…";
 "Register fixed katakana word to dict" = "カタカナで確定した単語を辞書に登録する";
+"Auto okuri" = "送り仮名を自動で解決する";
 "Ignore leading spaces when registering a word" = "単語登録中に先頭スペースを無視する";
 "Back to selecting candidates from empty word registration" = "単語登録中に前候補キーもしくはバックスペースキーで候補選択に戻る";
 "Complete yomi by Tab key in word registration" = "単語登録中にTabで読みを入力する";

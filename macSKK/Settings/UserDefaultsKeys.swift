@@ -68,6 +68,7 @@ struct UserDefaultsKeys {
     static let fixedCompletionByPeriod = "fixedCompletionByPeriod"
     // qキーでカタカナで確定した場合に辞書に登録するか
     static let registerKatakana = "registerKatakana"
+    static let autoOkuri = "autoOkuri"
     // 単語登録中に先頭のスペースを無視するか
     static let ignoreLeadingSpacesWhenRegistering = "ignoreLeadingSpacesWhenRegistering"
     // 単語登録中に空文字列で前候補キーもしくはバックスペースキーで候補選択に戻るか
