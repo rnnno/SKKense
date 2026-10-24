@@ -804,6 +804,50 @@ final class StateMachineTests: XCTestCase {
                  [.modeChanged(.hiragana), .markedPlain("[登録：と]")])
     }
 
+    @MainActor func testHandleComposingAutoOkuri() {
+        Global.autoOkuri = true
+        Global.dictionary.dicts = []
+        Global.dictionary.dicts.append(MemoryDict(entries: [
+            "かく": [Word("各"), Word("角"), Word("格"), Word("核"), Word("画"), Word("確"), Word("閣")],
+            "かk": [Word("書"), Word("掛"), Word("欠")],
+        ], readonly: true))
+
+        let ctx = StateMachineTestContext()
+        ctx.step(printableKeyEventAction(character: "k", withShift: true), [.composing("k")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("か")])
+        ctx.step(printableKeyEventAction(character: "k"), [.composing("かk")])
+        ctx.step(printableKeyEventAction(character: "u"), [.composing("かく")])
+        ctx.step(printableKeyEventAction(character: " "), [.selecting("各")])
+        ctx.step(printableKeyEventAction(character: " "), [.selecting("角")])
+        ctx.step(printableKeyEventAction(character: " "), [.selecting("格")])
+        ctx.step(printableKeyEventAction(character: " "), [.selecting("書く")])
+        ctx.step(enterAction, [.fixedText("書く")])
+
+        XCTAssertTrue(Global.dictionary.userDict?.refer("かk", option: nil).contains(Word("書", okuri: "く")) == true)
+        XCTAssertFalse(Global.dictionary.userDict?.refer("かく", option: nil).contains { $0.word == "書く" } == true)
+    }
+
+    @MainActor func testHandleComposingAutoOkuriDisabled() {
+        Global.autoOkuri = false
+        Global.dictionary.dicts = []
+        Global.dictionary.dicts.append(MemoryDict(entries: [
+            "かく": [Word("各"), Word("角"), Word("格"), Word("核"), Word("画"), Word("確"), Word("閣")],
+            "かk": [Word("書"), Word("掛"), Word("欠")],
+        ], readonly: true))
+
+        let ctx = StateMachineTestContext()
+        ctx.step(printableKeyEventAction(character: "k", withShift: true), [.composing("k")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("か")])
+        ctx.step(printableKeyEventAction(character: "k"), [.composing("かk")])
+        ctx.step(printableKeyEventAction(character: "u"), [.composing("かく")])
+        ctx.step(printableKeyEventAction(character: " "), [.selecting("各")])
+
+        guard case .selecting(let selecting) = ctx.stateMachine.state.inputMethod else {
+            return XCTFail("候補選択状態ではありません")
+        }
+        XCTAssertFalse(selecting.candidates.contains { $0.word == "書く" })
+    }
+
     @MainActor func testHandleComposingPrefix() {
         Global.dictionary.setEntries(["あ>": [Word("亜")], "あ": [Word("阿")]])
 

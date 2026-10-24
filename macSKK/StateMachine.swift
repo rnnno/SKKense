@@ -319,7 +319,8 @@ final class StateMachine {
                         let selecting = unregisterState.prev.selecting
                         let word = selecting.candidates[selecting.candidateIndex]
                         _ = Global.dictionary.delete(yomi: word.toMidashiString(yomi: selecting.yomi),
-                                                     word: Word(word.candidateString, okuri: selecting.okuri))
+                                                     word: Word(word.candidateString,
+                                                                okuri: word.original?.okuri ?? selecting.okuri))
 
                         if let prevMode = unregisterState.prev.selecting.prev.composing.prevMode {
                             // Abbrevモードの終了時の戻り先が指定されていれば、そちらに戻る
@@ -1514,7 +1515,7 @@ final class StateMachine {
         } else if let okuri = composing.okuri, !okuri.isEmpty {
             candidateWords = candidates(for: yomiText, option: .okuri(okuri.map { $0.kana }.joined()))
         } else {
-            candidateWords = candidates(for: yomiText, option: nil)
+            candidateWords = Global.conversion.candidates(yomi: yomiText, inputMode: state.inputMode)
         }
         if candidateWords.isEmpty {
             if case .register(let registerState, let prev) = specialState {
@@ -2002,6 +2003,7 @@ final class StateMachine {
         annotation: Annotation? = nil,
         source: UserDictAddSource = .conversion
     ) {
+        let okuri = candidate.original?.okuri ?? okuri
         if candidate.saveToUserDict {
             Global.dictionary.add(yomi: candidate.toMidashiString(yomi: yomi),
                                   word: Word(candidate.candidateString, okuri: okuri, annotation: annotation),

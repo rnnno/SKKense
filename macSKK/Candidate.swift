@@ -25,6 +25,15 @@ struct Candidate: Hashable {
          * 数値変換の場合 "第#1" のような変換フォーマットを表す表記がされている。
          */
         let word: Word.Word
+
+        /// 学習・削除に使う送り仮名ブロック（送り仮名の 1 文字目）。SelectingState の okuri より優先する。
+        let okuri: String?
+
+        init(midashi: String, word: Word.Word, okuri: String? = nil) {
+            self.midashi = midashi
+            self.word = word
+            self.okuri = okuri
+        }
     }
 
     /**
