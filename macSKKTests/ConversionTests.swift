@@ -7,20 +7,22 @@ import XCTest
 @testable import macSKK
 
 final class ConversionTests: XCTestCase {
+    private static let readonlyEntries: [String: [Word]] = [
+        "かく": [Word("各"), Word("角"), Word("格"), Word("核"), Word("画"), Word("確"), Word("閣")],
+        "かk": [Word("書"), Word("掛"), Word("欠")],
+        "きく": [Word("菊")],
+        "きk": [Word("聞"), Word("効")],
+        "かんがe": [Word("考")],
+        "かn": [Word("兼")],
+        "まちが": [Word("待画")],
+        "まt": [Word("待")],
+        "むずかs": [Word("難")],
+        "おおk": [Word("多"), Word("大", okuri: "き")],
+    ]
+
     override func setUp() async throws {
         try await MainActor.run {
-            Global.dictionary = try UserDict(dicts: [MemoryDict(entries: [
-                "かく": [Word("各"), Word("角"), Word("格"), Word("核"), Word("画"), Word("確"), Word("閣")],
-                "かk": [Word("書"), Word("掛"), Word("欠")],
-                "きく": [Word("菊")],
-                "きk": [Word("聞"), Word("効")],
-                "かんがe": [Word("考")],
-                "かn": [Word("兼")],
-                "まちが": [Word("待画")],
-                "まt": [Word("待")],
-                "むずかs": [Word("難")],
-                "おおk": [Word("多"), Word("大", okuri: "き")],
-            ], readonly: true)],
+            Global.dictionary = try UserDict(dicts: [MemoryDict(entries: Self.readonlyEntries, readonly: true)],
                                                  privateMode: CurrentValueSubject(false),
                                                  ignoreUserDictInPrivateMode: CurrentValueSubject(false),
                                                  dateYomis: [],
@@ -66,6 +68,22 @@ final class ConversionTests: XCTestCase {
     @MainActor func testUserDictFirst() {
         Global.dictionary.add(yomi: "かk", word: Word("書", okuri: "く"), source: .conversion)
         XCTAssertEqual(Global.conversion.candidates(yomi: "かく", inputMode: .hiragana).first?.word, "書く")
+    }
+
+    @MainActor func testPrivateModeIgnoresUserDict() throws {
+        let privateMode = CurrentValueSubject<Bool, Never>(false)
+        let ignoreUserDictInPrivateMode = CurrentValueSubject<Bool, Never>(false)
+        Global.dictionary = try UserDict(dicts: [MemoryDict(entries: Self.readonlyEntries, readonly: true)],
+                                         privateMode: privateMode,
+                                         ignoreUserDictInPrivateMode: ignoreUserDictInPrivateMode,
+                                         dateYomis: [],
+                                         dateConversions: [])
+        Global.dictionary.setEntries([:])
+        Global.dictionary.add(yomi: "かk", word: Word("書", okuri: "く"), source: .conversion)
+        privateMode.send(true)
+        ignoreUserDictInPrivateMode.send(true)
+        XCTAssertEqual(Global.conversion.candidates(yomi: "かく", inputMode: .hiragana).map(\.word),
+                       ["各", "角", "格", "書く", "掛く", "欠く", "核", "画", "確", "閣"])
     }
 
     @MainActor func testDisabled() {

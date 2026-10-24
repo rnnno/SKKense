@@ -89,14 +89,14 @@ struct OkuriResolver {
     }
 
     func merge(nashi: [Candidate], splits: [Candidate], snapshot: UserDict.Snapshot) -> [Candidate] {
-        let userNashiWords = Set(snapshot.userDict?.refer(yomi, option: nil).map(\.word) ?? [])
+        let userNashiWords = Set(snapshot.refer(yomi, option: nil).map(\.word))
         let userNashi = nashi.filter { userNashiWords.contains($0.candidateString) }
         let remainingNashi = nashi.filter { !userNashiWords.contains($0.candidateString) }
         let userSplits = splits.filter { candidate in
             guard let original = candidate.original, let okuri = original.okuri else { return false }
-            return snapshot.userDict?.refer(original.midashi, option: .okuri(okuri)).contains {
+            return snapshot.refer(original.midashi, option: .okuri(okuri)).contains {
                 $0.word == original.word
-            } == true
+            }
         }
         let userSplitWords = Set(userSplits.map(\.word))
         let remainingSplits = splits.filter { !userSplitWords.contains($0.word) }
