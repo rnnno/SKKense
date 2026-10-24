@@ -1500,9 +1500,9 @@ final class StateMachine {
     @MainActor func handleComposingStartConvert(_ action: Action, composing: ComposingState, specialState: SpecialState?) -> Bool {
         // 未確定ローマ字はn以外は入力されずに削除される. nだけは"ん"として変換する
         // 変換候補がないときは辞書登録へ
-        let trimmedComposing = composing.trim(kanaRule: Global.kanaRule)
+        var trimmedComposing = composing.trim(kanaRule: Global.kanaRule)
         var yomiText = trimmedComposing.yomi(for: self.state.inputMode, kanaRule: Global.kanaRule)
-        let candidateWords: [Candidate]
+        var candidateWords: [Candidate]
         // FIXME: Abbrevモードでも接頭辞、接尾辞を検索するべきか再検討する。
         // いまは ">"で終わる・始まる場合は、Abbrevモードであっても接頭辞・接尾辞を探しているものとして検索する
         // ">" 単体のように ">" を除くと読みが空になる場合は接頭辞・接尾辞変換とはみなさず、
@@ -1520,6 +1520,16 @@ final class StateMachine {
                                                            okuri: okuriKana,
                                                            reading: stemReading,
                                                            inputMode: state.inputMode)
+            if candidateWords.isEmpty && Global.autoOkuri && state.inputMode != .direct {
+                let united = trimmedComposing.uniteOkuri()
+                let unitedYomi = united.yomi(for: state.inputMode, kanaRule: Global.kanaRule)
+                let fallbackCandidates = Global.conversion.candidates(yomi: unitedYomi, inputMode: state.inputMode)
+                if !fallbackCandidates.isEmpty {
+                    trimmedComposing = united
+                    yomiText = unitedYomi
+                    candidateWords = fallbackCandidates
+                }
+            }
         } else {
             candidateWords = Global.conversion.candidates(yomi: yomiText, inputMode: state.inputMode)
         }

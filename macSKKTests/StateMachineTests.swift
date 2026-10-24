@@ -849,6 +849,69 @@ final class StateMachineTests: XCTestCase {
         XCTAssertFalse(selecting.candidates.contains { $0.word == "書く" })
     }
 
+    @MainActor func testHandleComposingOkuriFallback() {
+        Global.autoOkuri = true
+        Global.dictionary.dicts = []
+        Global.dictionary.dicts.append(MemoryDict(entries: [
+            "まちがe": [Word("間違")],
+        ], readonly: true))
+
+        let ctx = StateMachineTestContext()
+        ctx.step(printableKeyEventAction(character: "m", withShift: true), [.composing("m")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("ま")])
+        ctx.step(printableKeyEventAction(character: "t"), [.composing("まt")])
+        ctx.step(printableKeyEventAction(character: "i"), [.composing("まち")])
+        ctx.step(printableKeyEventAction(character: "g"), [.composing("まちg")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("まちが")])
+        ctx.step(printableKeyEventAction(character: "e"), [.composing("まちがえ")])
+        ctx.step(printableKeyEventAction(character: "r", withShift: true), [.composing("まちがえ*r")])
+        ctx.step(printableKeyEventAction(character: "u"), [.selecting("間違える")])
+        ctx.step(enterAction, [.fixedText("間違える")])
+
+        XCTAssertTrue(Global.dictionary.userDict?.refer("まちがe", option: nil)
+            .contains(Word("間違", okuri: "え")) == true)
+    }
+
+    @MainActor func testHandleComposingOkuriFallbackKangaeru() {
+        Global.autoOkuri = true
+        Global.dictionary.dicts = []
+        Global.dictionary.dicts.append(MemoryDict(entries: [
+            "かんがe": [Word("考")],
+            "かんg": [Word("勘")],
+        ], readonly: true))
+
+        let ctx = StateMachineTestContext()
+        ctx.step(printableKeyEventAction(character: "k", withShift: true), [.composing("k")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("か")])
+        ctx.step(printableKeyEventAction(character: "n"), [.composing("かn")])
+        ctx.step(printableKeyEventAction(character: "n"), [.composing("かん")])
+        ctx.step(printableKeyEventAction(character: "g"), [.composing("かんg")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("かんが")])
+        ctx.step(printableKeyEventAction(character: "e"), [.composing("かんがえ")])
+        ctx.step(printableKeyEventAction(character: "r", withShift: true), [.composing("かんがえ*r")])
+        ctx.step(printableKeyEventAction(character: "u"), [.selecting("考える")])
+    }
+
+    @MainActor func testHandleComposingOkuriFallbackDisabled() {
+        Global.autoOkuri = false
+        Global.dictionary.dicts = []
+        Global.dictionary.dicts.append(MemoryDict(entries: [
+            "まちがe": [Word("間違")],
+        ], readonly: true))
+
+        let ctx = StateMachineTestContext()
+        ctx.step(printableKeyEventAction(character: "m", withShift: true), [.composing("m")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("ま")])
+        ctx.step(printableKeyEventAction(character: "t"), [.composing("まt")])
+        ctx.step(printableKeyEventAction(character: "i"), [.composing("まち")])
+        ctx.step(printableKeyEventAction(character: "g"), [.composing("まちg")])
+        ctx.step(printableKeyEventAction(character: "a"), [.composing("まちが")])
+        ctx.step(printableKeyEventAction(character: "e"), [.composing("まちがえ")])
+        ctx.step(printableKeyEventAction(character: "r", withShift: true), [.composing("まちがえ*r")])
+        ctx.step(printableKeyEventAction(character: "u"),
+                 [.modeChanged(.hiragana), .markedPlain("[登録：まちがえ*る]")])
+    }
+
     @MainActor func testHandleComposingStemConversionExplicit() {
         Global.stemConversion = true
         Global.dictionary.dicts = []
